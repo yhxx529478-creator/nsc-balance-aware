@@ -1,0 +1,87 @@
+{
+  "version": "v2-exploratory-excess-adjacency",
+  "registered_before_v2_evaluation_local": "2026-11-17T19:39:11.440507+08:00",
+  "status": "development_exploration_after_inspecting_v1_development_results",
+  "candidate_count": 1,
+  "candidate_formula": "S0/(1+lambda*max(0,D_adj-2*L/(L-1)*CV2)) for L>1; zero penalty for L=1",
+  "random_reference": "exact expectation of D_adj over uniform permutations of the same indexed capacity multiset; no Monte Carlo",
+  "two_layer_convention": "excess is exactly zero: both possible orders have the same mismatch",
+  "grid": [
+    0,
+    0.1,
+    0.25,
+    0.5,
+    1,
+    2
+  ],
+  "selection_objective": "maximize development Spearman rho against negative validation perplexity; exact ties prefer smaller lambda",
+  "selection_scope": "one full-development coefficient per mechanism; no selecting by local pair or budget results",
+  "comparators": [
+    "original_nsc",
+    "position_example",
+    "v1_frozen_lambda0.1",
+    "v1_reselected_same_grid",
+    "global_reselected_same_grid",
+    "global_at_v2_lambda",
+    "uncentered_at_v2_lambda",
+    "reported_parameters",
+    "reference_flops",
+    "random_selection"
+  ],
+  "official_ablation_interface": "uncentered adjacent penalty at v2-selected lambda, removing only the random-permutation reference",
+  "score_precision": "12 significant digits for comparisons",
+  "size_control": "same hidden width; min(total)/max(total)>=0.90",
+  "pair_diagnostics": [
+    "corrected",
+    "damaged",
+    "net_corrections",
+    "changed_pairs",
+    "correction_precision",
+    "original_error_recovery_fraction",
+    "score_ties"
+  ],
+  "margin_definition": "abs(log(original_nsc_a/original_nsc_b))",
+  "margin_band_edges": [
+    0,
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1,
+    "infinity"
+  ],
+  "near_score_primary_diagnostic": "original log margin <0.01 (approximately 1%); fixed before v2 evaluation, chosen after viewing v1 diagnostics",
+  "near_score_secondary_diagnostic": "original log margin <0.05; also show every predefined band",
+  "pair_subgroups": [
+    "all",
+    "same_hidden_width",
+    "different_hidden_width",
+    "size_controlled",
+    "near_1pct",
+    "near_5pct",
+    "near_1pct_and_size_controlled"
+  ],
+  "budget_caps": [
+    10000000,
+    20000000,
+    30000000,
+    50000000
+  ],
+  "k_values": [
+    1,
+    3
+  ],
+  "selection_trials": 200,
+  "seed_rule": "202627+budget+k",
+  "stability_analysis": {
+    "folds": 5,
+    "stratify": "hidden width",
+    "seed": 20261117,
+    "train_only_coefficient_selection": true,
+    "report": "held-out-fold metrics and correction counts; do not rank scores pooled across folds with different lambdas",
+    "interpretation": "development stability analysis only, not untouched validation: all development labels have previously been inspected"
+  },
+  "success_interpretation": "report all predefined outcomes; local improvements alone do not establish overall or causal benefit",
+  "final_labels": "never open or hash; final evaluation excluded",
+  "v1_policy": "preserve all v1 frozen source and result hashes"
+}

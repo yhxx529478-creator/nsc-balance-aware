@@ -1,0 +1,18 @@
+{
+  "phase": "development_only",
+  "grid": [0, 0.1, 0.25, 0.5, 1, 2],
+  "selection_objective": "maximum development Spearman rho against negative validation perplexity",
+  "tie_break": "smaller lambda on exact equality",
+  "adjacent_formula": "S0 / (1 + lambda * mean_adjacent_squared_capacity_difference / mean_capacity^2)",
+  "global_formula": "S0 / (1 + lambda * population_capacity_variance / mean_capacity^2)",
+  "ablation": "global penalty at adjacent-selected lambda",
+  "additional_global_baseline": "independently select global lambda using the same grid and objective",
+  "score_precision": "12 significant digits, comparisons only",
+  "parameter_budgets": [10000000, 20000000, 30000000, 50000000],
+  "k_values": [1, 3],
+  "random_trials": 200,
+  "seed_rule": "202627 + parameter_budget + k",
+  "size_control": "same d_model and min(total)/max(total) >= 0.90",
+  "uncertainty": "selection/tie randomness only; no claim of training-seed uncertainty",
+  "final_labels": "must not be opened during development; final evaluation is not part of this runner"
+}
