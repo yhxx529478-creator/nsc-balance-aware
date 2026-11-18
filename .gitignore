@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+outputs/
+.env
+.env.*
+**/final_labels.json
+.DS_Store
+Thumbs.db
